@@ -21,6 +21,7 @@ problem - hör av dig!
     Nedan listar jag min planering. Är allt checkat så har jag gjort allt jag planerat för stunden, är något öppet så är
     det på gång!
 
+
     - [ ] Beskrivning av aktivering av funktioner via sidhuvud
     - [x] handlerExtendLight
     - [ ] handlerExtended
@@ -33,6 +34,7 @@ problem - hör av dig!
         <h2>Beskrivning av aktivering av funktioner via sidhuvud</h2>
     </summary>
     Nedan följer en detaljerad beskrivning om hur du hanterar och aktiverar scripten i denna repo.
+    
 
     <details open>
         <summary>
