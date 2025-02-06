@@ -54,5 +54,6 @@ function insertElements() {
 }
 //#endregion 
 if (window.location.href.includes('/manage/flowinstanceadmin/overview/')) {
+    document.body.classList.add('spc-overview-page');
     insertElements()
 }
