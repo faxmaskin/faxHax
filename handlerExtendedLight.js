@@ -27,7 +27,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 //#endregion
-//#region 0. KONSTANTER - dessa ska vanligtvis inte ändras, utan är samma i alla installationer
+//#region KONSTANTER - dessa ska vanligtvis inte ändras, utan är samma i alla installationer
 const version = "1.0.0";
 const lastEditDate = "2025-02-06";
 const author = "faxmaskin@duck.com"
