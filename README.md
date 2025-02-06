@@ -5,6 +5,7 @@ Det rör sig med andra ord om rena DOM-modifikationer och används efter eget f�
 
 <details open >
   <summary>Pågående utveckling</summary>
+ 
   - [ ] Beskrivning av aktivering av funktioner via sidhuvud
   - [x] handlerExtendLight
   - [ ] handlerExtended
