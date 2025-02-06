@@ -17,7 +17,7 @@ problem - hör av dig!
 ## Att göra
 Nedan listar jag min planering. Är allt checkat så har jag gjort allt jag planerat för stunden, är något öppet så är det på gång! 
 
-- [x] [Beskrivning av aktivering av funktioner via sidhuvud](headerAndFilemanager)
+- [x] [Beskrivning av aktivering av funktioner via sidhuvud](headerAndFilemanager.md)
 - [x] [handlerExtendLight](handlerExtendedLight.js)
 - [ ] handlerExtended
 - [ ] messageToManagers
