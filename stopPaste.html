@@ -1,0 +1,44 @@
+<!--
+stopPaste - Tagg som kan användas för att förhindra att användare klistrar in text i ett textfält
+https://github.com/faxmaskin/faxHax
+ 
+MIT License
+
+Copyright (c) 2025 Joakim Curt Olsson (faxmaskin@duck.com)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+-->
+
+<!-- Användning: 
+1. Kopiera allt i denna fil och gå till menyn "Systemadm." och välj alternativet "Taggar"
+2. Klicka på "lägg till tagg"
+3. Beroende på vilket typ av element du vill förhindra inklistring i, döp taggen till t.ex stopPasteTA för textarea eller stopPasteIP för input
+4. Välj Formulärtyp "Editor" och klicka på "Källa" under rubriken "Standardvärde"
+5. Klistra in allt du kopierade i fältet "Tagg", om du vill påverka någon annan elementtyp än textarea ändrar du det i koden
+6. För att använda taggen på en fråga skriver du helt enkelt ${stopPasteTA} i beskrivningen
+-->
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    let stopPaste = $('p#stopPaste').closest('article').find('textarea').eq(0).attr('id');
+    $('#' + stopPaste).on("paste", function (e) {
+        e.preventDefault();
+    });
+});
+</script>
+<p class="hidden" id="stopPaste"></p>
