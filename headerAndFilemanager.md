@@ -153,18 +153,18 @@ Följande behöver tas hänsyn till och ändras efter behov:
         const sokvag = '/fileconnector/file/oto/';
 
         // Utökad ärendehandläggning, enklare variant med bara genvägar till handläggar- och statusbyten
-        // Glöm inte att ändra version nedan vid byte, om det är version x.x skrivs det som x_x, t.ex. 2.1 skrivs som 2_1
+        // Glöm inte att ändra version nedan vid byte, om det är version x.x skrivs det som x_x, t.ex. 2.1 skrivs som "2_1"
         const handlerExtendedLightVersion = 1;
         const handlerExtendedLight = false;
 
         // Utökad ärendehandläggning
-        // Glöm inte att ändra version nedan vid byte, om det är version x.x skrivs det som x_x, t.ex. 2.1 skrivs som 2_1
+        // Glöm inte att ändra version nedan vid byte, om det är version x.x skrivs det som x_x, t.ex. 2.1 skrivs som "2_1"
         const handlerExtendedVersion = 2;
         const handlerExtended = true;
 
         // Funktion som möjliggör meddelande till handläggare
-        // Glöm inte att ändra version nedan vid byte, om det är version x.x skrivs det som x_x, t.ex. 2.1 skrivs som 2_1
-        const messageToManagersVersion = 1_2;
+        // Glöm inte att ändra version nedan vid byte, om det är version x.x skrivs det som x_x, t.ex. 2.1 skrivs som "2_1"
+        const messageToManagersVersion = "1_2";
         const messageToManagers = false;
         //#endregion Övergripande
 
