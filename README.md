@@ -20,5 +20,5 @@ Nedan listar jag min planering. Är allt checkat så har jag gjort allt jag plan
 - [x] [Beskrivning av aktivering av funktioner via sidhuvud](headerAndFilemanager.md)
 - [x] [handlerExtendLight](handlerExtendedLight.js)
 - [x] [stopPaste](stopPaste.html)
-- [ ] handlerExtended
+- [x] [handlerExtended](handlerExtended.js)
 - [ ] messageToManagers
