@@ -448,12 +448,12 @@ async function fetchAndInsertElements() {
         ];
 
         reloadDynamicScripts(scriptBaseNames);
-        //#endregion
-        //#endregion    
+        //#endregion 
     } catch (error) {
         console.error('Något gick fel vid hämtning av elementen:', error);
     }
 }
+//#endregion
 //#region 2.0 KÖR SCRIPTET
 if (window.location.href.includes('/manage/flowinstanceadmin/overview/')) {
     document.body.classList.add('spc-overview-page');
