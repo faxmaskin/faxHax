@@ -480,7 +480,7 @@ if (window.location.href.includes('/manage/flowinstanceadmin/overview/')) {
             font-style: normal;
             color: #1a7f37;
         }
-        .spc-sta-btn:hover {
+        .spc-sta-btn.btn-light:hover {
             transform: translateY(2px);
             background-color: #bddeee;
         }
