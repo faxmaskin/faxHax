@@ -22,3 +22,4 @@ Nedan listar jag min planering. Är allt checkat så har jag gjort allt jag plan
 - [x] [stopPaste](stopPaste.html)
 - [x] [handlerExtended](handlerExtended.js)
 - [ ] messageToManagers
+- [ ] exportAllMessages
