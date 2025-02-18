@@ -21,5 +21,6 @@ Nedan listar jag min planering. Är allt checkat så har jag gjort allt jag plan
 - [x] [handlerExtendLight](handlerExtendedLight.js)
 - [x] [stopPaste](stopPaste.html)
 - [x] [handlerExtended](handlerExtended.js)
+- [ ] exportMessages
 - [ ] messageToManagers
-- [ ] exportAllMessages
+
