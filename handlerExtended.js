@@ -1,5 +1,5 @@
 /*
-handLerExtended - UtÃ¶kad Ã¤rendehantering i Open ePlatform
+handLerExtended - Utökad ärendehantering i Open ePlatform
 https://github.com/faxmaskin/faxHax
 */
 //#region Licens
@@ -27,33 +27,33 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 //#endregion
-//#region 0. KONSTANTER - dessa ska vanligtvis inte Ã¤ndras, utan Ã¤r samma i alla installationer
-const version = "2.0.1";
-const lastEditDate = "2025-02-11";
+//#region 0. KONSTANTER - dessa ska vanligtvis inte ändras, utan är samma i alla installationer
+const version = "2.0.2";
+const lastEditDate = "2025-02-19";
 const author = "faxmaskin@duck.com"
 
-// En samling konstanter med adress, som Ã¤r kÃ¤nda eller hÃ¤mtas frÃ¥n url
+// En samling konstanter med adress, som är kända eller hämtas från url
 const url = window.location.href;
 const flowInstanceId = url.substring(url.lastIndexOf('/') + 1);
 const statusUrl = `/manage/flowinstanceadmin/status/${flowInstanceId}`;
 const managersUrl = `/manage/flowinstanceadmin/getmentionusers/${flowInstanceId}`;
 const updateManagersURL = `/manage/flowinstanceadmin/managers/${flowInstanceId}`;
 //#endregion
-//#region 1.0 FUNKTIONER FÃ–R HÃ„MTNING AV INNEHÃ…LL OCH SKAPANDE AV ELEMENT
-// Funktion fÃ¶r att hÃ¤mta och infoga elementen
+//#region 1.0 FUNKTIONER FÖR HÄMTNING AV INNEHÅLL OCH SKAPANDE AV ELEMENT
+// Funktion för att hämta och infoga elementen
 async function fetchAndInsertElements() {
     try {
-        //#region 1.1 HÃ„MTNING OCH LISTNING 
+        //#region 1.1 HÄMTNING OCH LISTNING 
 
-        // HÃ¤mta och lista tilldelade handlÃ¤ggare
+        // Hämta och lista tilldelade handläggare
         const responseAssignedManagers = await fetch(updateManagersURL);
         const assignedManagersText = await responseAssignedManagers.text();
         const tempDivManagers = document.createElement('div');
         tempDivManagers.innerHTML = assignedManagersText;
         const allfromMan = Array.from(tempDivManagers.querySelectorAll('#userID-list li input'));
-        const filfromMan = allfromMan.slice(0, -3); // De tre sista vÃ¤rdena i denna lista Ã¤r inte kopplade till handlÃ¤ggare, sÃ¥ de plockas bort
+        const filfromMan = allfromMan.slice(0, -3); // De tre sista värdena i denna lista är inte kopplade till handläggare, så de plockas bort
         const assignedManagers = [];
-        for (let i = 0; i < filfromMan.length; i += 2) { // Varje handlÃ¤ggare har tvÃ¥ vÃ¤rden i tvÃ¥ objekt, dÃ¤rfÃ¶r behÃ¶ver vi hÃ¤mta ett frÃ¥n jÃ¤mna rader, och ett frÃ¥n ojÃ¤mna
+        for (let i = 0; i < filfromMan.length; i += 2) { // Varje handläggare har två värden i två objekt, därför behöver vi hämta ett från jämna rader, och ett från ojämna
             const idInput = filfromMan[i];
             const nameInput = filfromMan[i + 1];
             assignedManagers.push({
@@ -62,7 +62,7 @@ async function fetchAndInsertElements() {
             });
         }
 
-        // HÃ¤mta och lista mÃ¶jliga handlÃ¤ggare (frÃ¥n getmentionusers) och filtrera bort redan tilldelade handlÃ¤ggare
+        // Hämta och lista möjliga handläggare (från getmentionusers) och filtrera bort redan tilldelade handläggare
         const responseManagers = await fetch(managersUrl);
         const buffer = await responseManagers.arrayBuffer();
         const decoder = new TextDecoder('iso-8859-1');
@@ -79,7 +79,7 @@ async function fetchAndInsertElements() {
             }
         });
 
-        // HÃ¤mta och lista statusar
+        // Hämta och lista statusar
         const responseStatus = await fetch(statusUrl);
         const statusHTML = await responseStatus.text();
         const tempDiv = document.createElement('div');
@@ -89,22 +89,22 @@ async function fetchAndInsertElements() {
         formSec[0].style.display = 'none';
         formSec[3].id = "formBtns";
         formSec[3].style.display = 'none';
-        const statuses = tempDiv.querySelectorAll('.bigmarginleft'); // Alla statusar har denna class, dÃ¤rfÃ¶r kan det anvÃ¤ndas som selector
+        const statuses = tempDiv.querySelectorAll('.bigmarginleft'); // Alla statusar har denna class, därför kan det användas som selector
         //#endregion 
         //#region 1.2 SKAPA STRUKTUREN 
 
-        // NIVÃ… 1 
+        // NIVÅ 1 
         const startDiv = document.querySelector('.description');
         const spcWrapper = Object.assign(document.createElement('div'), { className: "spc-handlerExtendedByJooL", id: version });
         const divider = Object.assign(document.createElement('div'), { className: "divider" });
         spcWrapper.append(divider);
 
-        // NIVÃ… 2 - VISA/DÃ–LJ Ã„NDRA HANDLÃ„GGARE
+        // NIVÅ 2 - VISA/DÖLJ ÄNDRA HANDLÄGGARE
         const manChgDiv = Object.assign(document.createElement('div'), { id: "man-handler-div" });
-        const manChgBtnShow = (Object.assign(document.createElement('a'), { id: "manShowBtn", href: "#", textContent: "Ã„ndra handlÃ¤ggare" }));
+        const manChgBtnShow = (Object.assign(document.createElement('a'), { id: "manShowBtn", href: "#", textContent: "Ändra handläggare" }));
         manChgBtnShow.classList.add('btn', 'btn-green', 'btn-inline');
         manChgBtnShow.style.display = '';
-        const manChgBtnHide = (Object.assign(document.createElement('a'), { id: "manHideBtn", href: "#", textContent: "DÃ¶lj Ã¤ndra handlÃ¤ggare" }));
+        const manChgBtnHide = (Object.assign(document.createElement('a'), { id: "manHideBtn", href: "#", textContent: "Dölj ändra handläggare" }));
         manChgBtnHide.classList.add('btn', 'btn-red', 'btn-inline');
         manChgBtnHide.style.display = 'none';
         manChgDiv.appendChild(manChgBtnShow);
@@ -112,10 +112,10 @@ async function fetchAndInsertElements() {
         manChgDiv.appendChild(document.createElement('p'));
         spcWrapper.append(manChgDiv);
 
-        // NIVÃ… 3 - HANTERING AV HANDLÃ„GGARE
+        // NIVÅ 3 - HANTERING AV HANDLÄGGARE
         const manHandler = Object.assign(document.createElement('fieldset'), { id: "spc-flowinstance-manager-handler", style: "font-size: 14px;" });
         const manHandlerLeg = Object.assign(document.createElement('legend'), {
-            textContent: "Ã„ndra handlÃ¤ggare",
+            textContent: "Ändra handläggare",
             style: "font-weight:600; line-height:2em; font-size:18px; padding: 0 4px 0 4px; color: #393939;"
         });
         manHandler.style.display = 'none';
@@ -124,22 +124,22 @@ async function fetchAndInsertElements() {
         const ulMan = Object.assign(document.createElement('ul'), { id: "spc-man-userID-list" });
         ulMan.classList.add('list-style-type-none', 'margintop', 'usergroup-list');
         assignedManagers.forEach(man => {
-            ulMan.appendChild(createManListItem(man, "Ta bort handlÃ¤ggare", "Ta bort handlÃ¤ggare", "spcRemoveBtn", 'btn-red'));
+            ulMan.appendChild(createManListItem(man, "Ta bort handläggare", "Ta bort handläggare", "spcRemoveBtn", 'btn-red'));
         });
         possibleManagers.forEach(man => {
-            ulMan.appendChild(createManListItem(man, "LÃ¤gg till handlÃ¤ggare", "LÃ¤gg till handlÃ¤ggare", "spcAddBtn", 'btn-green'));
+            ulMan.appendChild(createManListItem(man, "Lägg till handläggare", "Lägg till handläggare", "spcAddBtn", 'btn-green'));
         });
         manHandler.appendChild(manHandlerLeg);
         manHandlerIn.appendChild(ulMan);
         manHandler.appendChild(manHandlerIn);
         spcWrapper.append(manHandler);
 
-        // NIVÃ… 4 - VISA/DÃ–LJ Ã„NDRA STATUS
+        // NIVÅ 4 - VISA/DÖLJ ÄNDRA STATUS
         const staChgDiv = Object.assign(document.createElement('div'), { id: "sta-handler-div" });
-        const staChgBtnShow = (Object.assign(document.createElement('a'), { id: "staShowBtn", href: "#", textContent: "Ã„ndra Ã¤rendestatus" }));
+        const staChgBtnShow = (Object.assign(document.createElement('a'), { id: "staShowBtn", href: "#", textContent: "Ändra ärendestatus" }));
         staChgBtnShow.classList.add('btn', 'btn-green', 'btn-inline');
         staChgBtnShow.style.display = 'none';
-        const staChgBtnHide = (Object.assign(document.createElement('a'), { id: "staHideBtn", href: "#", textContent: "DÃ¶lj Ã¤ndra Ã¤rendestatus" }));
+        const staChgBtnHide = (Object.assign(document.createElement('a'), { id: "staHideBtn", href: "#", textContent: "Dölj ändra ärendestatus" }));
         staChgBtnHide.classList.add('btn', 'btn-red', 'btn-inline');
         staChgBtnHide.style.display = '';
         staChgDiv.appendChild(document.createElement('h1'));
@@ -148,11 +148,11 @@ async function fetchAndInsertElements() {
         staChgDiv.appendChild(document.createElement('p'));
         spcWrapper.append(staChgDiv);
 
-        // NIVÃ… 5 - HANTERING AV STATUS
+        // NIVÅ 5 - HANTERING AV STATUS
         const staHandler = Object.assign(document.createElement('fieldset'), { id: "spc-flowinstance-status-handler", style: "font-size: 14px;" });
         staHandler.style.display = 'block';
         const staHandlerLeg = Object.assign(document.createElement('legend'), {
-            textContent: "Ã„ndra Ã¤rendestatus",
+            textContent: "Ändra ärendestatus",
             style: "font-weight:600; line-height:2em; font-size:18px; padding: 0 4px 0 4px; color: #393939;"
         });
         const staFormDiv = Object.assign(document.createElement('div'), { className: "spc-formDiv" });
@@ -171,7 +171,7 @@ async function fetchAndInsertElements() {
             const descDiv = status.querySelector('.internal-description');
             const staDesc = descDiv ? descDiv.textContent : null;
 
-            // Skapa knapp fÃ¶r statusbyte
+            // Skapa knapp för statusbyte
             const staBtn = (Object.assign(document.createElement('a'), { id: staID, href: "#", textContent: staName }));
             if (staDesc) {
                 staBtn.title = staDesc;
@@ -199,12 +199,12 @@ async function fetchAndInsertElements() {
             staFormDiv.appendChild(staBtn);
         });
 
-        // Skapa div fÃ¶r statusbeskrivning
+        // Skapa div för statusbeskrivning
         const staDescDiv = Object.assign(document.createElement('div'), { id: "spcStatusDesc" });
         staDescDiv.style.fontWeight = 100;
         const staTextP = Object.assign(document.createElement('p'), {
             className: "spc-statusText",
-            innerHTML: 'Aktuell status Ã¤r <span class="spc-highlight-green">grÃ¶nmarkerad</span><br>Klicka pÃ¥ den status du vill byta till fÃ¶r att Ã¤ndra Ã¤rendets status.',
+            innerHTML: 'Aktuell status är <span class="spc-highlight-green">grönmarkerad</span><br>Klicka på den status du vill byta till för att ändra ärendets status.',
             style: "font-size: 14px;"
         });
 
@@ -218,20 +218,20 @@ async function fetchAndInsertElements() {
         spcWrapper.append(staTextP);
         spcWrapper.append(theForm);
 
-        // Knyt ihop sÃ¤cken
+        // Knyt ihop säcken
         startDiv.insertAdjacentElement("afterend", spcWrapper);
 
         //#endregion 
         //#region 1.3 FUNKTIONER OCH EVENTHANDLERS 
-        //#region 1.3.0. Funktion fÃ¶r att sÃ¤tta rÃ¤tt teckenkodning vid behov
+        //#region 1.3.0. Funktion för att sätta rätt teckenkodning vid behov
         function decodeISO88591(encodedString) {
             const isoDecoder = new TextDecoder("iso-8859-1");
             const bytes = new Uint8Array(encodedString.split('').map(c => c.charCodeAt(0)));
             return isoDecoder.decode(bytes);
         }
         //#endregion 
-        //#region 1.3.1. LÃ¤gg till funktion fÃ¶r att dÃ¶lja och visa knappar och div fÃ¶r hantering av handlÃ¤ggare
-        // PÃ¥verkar NIVÃ… 2 och NIVÃ… 3
+        //#region 1.3.1. Lägg till funktion för att dölja och visa knappar och div för hantering av handläggare
+        // Påverkar NIVÅ 2 och NIVÅ 3
         function toggleButtonMan(event) {
             event.preventDefault();
             const showHideClicked = event.target;
@@ -250,8 +250,8 @@ async function fetchAndInsertElements() {
         manChgBtnShow.addEventListener('click', toggleButtonMan);
         manChgBtnHide.addEventListener('click', toggleButtonMan);
         //#endregion 
-        //#region 1.3.2 Funktion fÃ¶r att skapa li element fÃ¶r lÃ¤gg till eller ta bort knappar
-        // PÃ¥verkar NIVÃ… 3
+        //#region 1.3.2 Funktion för att skapa li element för lägg till eller ta bort knappar
+        // Påverkar NIVÅ 3
         function createManListItem(man, actionText, actionTitle, actionClass, colorClass) {
             const spcUserID = decodeISO88591(man.userId);
             const spcUserName = decodeISO88591(man.userName);
@@ -285,8 +285,8 @@ async function fetchAndInsertElements() {
             return liMan;
         }
         //#endregion 
-        //#region 1.3.3 Funktion fÃ¶r att lÃ¤gga till eller ta bort anvÃ¤ndare
-        // PÃ¥verkar NIVÃ… 3
+        //#region 1.3.3 Funktion för att lägga till eller ta bort användare
+        // Påverkar NIVÅ 3
         async function addRemoveBtn(actionClass, data) {
             const updatedManagers = [];
             if (actionClass === 'spcAddBtn') {
@@ -328,8 +328,8 @@ async function fetchAndInsertElements() {
             }
         }
         //#endregion 
-        //#region 1.3.4 LÃ¤gg till funktion fÃ¶r att dÃ¶lja och visa knappar och div fÃ¶r hantering av status
-        // PÃ¥verkar NIVÃ… 4 och NIVÃ… 5
+        //#region 1.3.4 Lägg till funktion för att dölja och visa knappar och div för hantering av status
+        // Påverkar NIVÅ 4 och NIVÅ 5
         function toggleButtonSta(event) {
             const showHideClicked = event.target;
             const showHideNotClickedId = showHideClicked.id === 'staShowBtn' ? 'staHideBtn' : 'staShowBtn';
@@ -347,8 +347,8 @@ async function fetchAndInsertElements() {
         staChgBtnShow.addEventListener('click', toggleButtonSta);
         staChgBtnHide.addEventListener('click', toggleButtonSta);
         //#endregion 
-        //#region 1.3.5 HÃ¤mta eventuell statusbeskrivning och visa i spcStatusDesc vid hover
-        // PÃ¥verkar NIVÃ… 5
+        //#region 1.3.5 Hämta eventuell statusbeskrivning och visa i spcStatusDesc vid hover
+        // Påverkar NIVÅ 5
         const statusDescs = document.querySelectorAll('.spc-sta-btn');
         statusDescs.forEach(statusDesc => {
             statusDesc.addEventListener('mouseover', function () {
@@ -363,26 +363,27 @@ async function fetchAndInsertElements() {
             });
         });
         //#endregion 
-        //#region 1.3.6 LÃ¤gg till en eventlistener fÃ¶r alla status-knappar
-        // PÃ¥verkar NIVÃ… 5
+        //#region 1.3.6 Lägg till en eventlistener för alla status-knappar
+        // Påverkar NIVÅ 5
         const statusBtns = staFormDiv.querySelectorAll('.spc-sta-btn');
         statusBtns.forEach(btn => {
             if (btn.classList.contains('disabled')) {
                 btn.addEventListener('click', function () {
-                    alert('Du kan inte byta tilla denna status, se statusbeskrivning fÃ¶r mer information.');
+                    alert('Du kan inte byta tilla denna status, se statusbeskrivning för mer information.');
                 });
             } else {
                 btn.addEventListener('click', function () {
                     const statusText = btn.textContent;
                     const statusMessageRequired = btn.classList.contains('spc-sta-btn-msg-int') || btn.classList.contains('spc-sta-btn-msg-ext');
-                    const confirmSave = confirm(`Vill du Ã¤ndra status till "${statusText}"?`);
+                    const confirmSave = confirm(`Vill du ändra status till "${statusText}"?`);
                     if (btn.classList.contains('btn-light')) {
                         btn.classList.remove('btn-light');
                         btn.classList.add('btn-blue');
                     }
                     if (confirmSave) {
                         if (statusMessageRequired) {
-                            alert(`Byte till status: "${statusText}"\n\nByte till denna status krÃ¤ver att du lÃ¤gger ett meddelande och/eller en intern notering.\n\n Skriv i textfÃ¤lt nedan och bekrÃ¤fta med knappen "Spara Ã¤ndringar".`);
+                            reloadDynamicScripts(scriptBaseNames);
+                            alert(`Byte till status: "${statusText}"\n\nByte till denna status kräver att du lägger ett meddelande och/eller en intern notering.\n\n Skriv i textfält nedan och bekräfta med knappen "Spara ändringar".`);
                             document.querySelector(`#status_${btn.id}`).checked = true;
                             document.querySelector(`#status_${btn.id}`).dispatchEvent(new Event('change', { bubbles: true }));
                             document.querySelector('#formBtns').style.display = 'block';
@@ -415,8 +416,8 @@ async function fetchAndInsertElements() {
             }
         });
         //#endregion
-        //region 1.3.7 Uppdatera nÃ¶dvÃ¤ndiga script
-        // PÃ¥verkar NIVÃ… 5
+        //region 1.3.7 Uppdatera nödvändiga script
+        // Påverkar NIVÅ 5
         function reloadDynamicScripts(scriptBaseNames) {
             scriptBaseNames.forEach(baseName => {
                 let oldScript = [...document.querySelectorAll("script")].find(script =>
@@ -435,7 +436,7 @@ async function fetchAndInsertElements() {
             });
         }
 
-        // Lista Ã¶ver script som behÃ¶ver laddas om
+        // Lista över script som behöver laddas om
         const scriptBaseNames = [
             "jquery.qloader.js",
             "featherlight.min.js",
@@ -446,15 +447,13 @@ async function fetchAndInsertElements() {
             "jquery.qloader-init.js",
             "flowinstanceadmin2.js"
         ];
-
-        reloadDynamicScripts(scriptBaseNames);
         //#endregion 
     } catch (error) {
-        console.error('NÃ¥got gick fel vid hÃ¤mtning av elementen:', error);
+        console.error('Något gick fel vid hämtning av elementen:', error);
     }
 }
 //#endregion
-//#region 2.0 KÃ–R SCRIPTET
+//#region 2.0 KÖR SCRIPTET
 if (window.location.href.includes('/manage/flowinstanceadmin/overview/')) {
     document.body.classList.add('spc-overview-page');
     const style = document.createElement("style");
