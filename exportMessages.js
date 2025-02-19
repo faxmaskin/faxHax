@@ -163,7 +163,7 @@ async function createPDF(id, title, arende, inskickatAv, inskickat, tjanst, imgU
         addPageNumbers();
 
         // Ladda ner PDF
-        doc.save(`${title}-${getCurrentDate()}.pdf`);
+        doc.save(`${title}-${arende}-${getCurrentDate()}.pdf`);
     };
     reader.readAsDataURL(blob);
 }
