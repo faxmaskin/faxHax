@@ -166,6 +166,11 @@ Följande behöver tas hänsyn till och ändras efter behov:
         // Glöm inte att ändra version nedan vid byte, om det är version x.x skrivs det som x_x, t.ex. 2.1 skrivs som "2_1"
         const messageToManagersVersion = "1_2";
         const messageToManagers = false;
+
+         // Extra information för e-tjänsteadministratörer
+        // Glöm inte att ändra version nedan vid byte, om det är version x.x skrivs det som "x_x", t.ex. 2.1 skrivs som "2_1"
+        const exportMessagesVersion = 1;
+        const exportMessages = true;
         //#endregion Övergripande
 
         //#region Initiera valda funktioner
@@ -190,6 +195,14 @@ Följande behöver tas hänsyn till och ändras efter behov:
                 await initScript(sokvag, 'messageToManagers', messageToManagersVersion);
             } catch (error) {
                 console.error("Fel vid inläsning av messageToManagers:", error);
+            }
+        }
+
+      if (exportMessages) {
+            try {
+                await initScript(sokvag, 'exportMessages', exportMessagesVersion);
+            } catch (error) {
+                console.error("Fel vid inläsning av extraInfo:", error);
             }
         }
     }
