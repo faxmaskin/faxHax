@@ -32,9 +32,9 @@ SOFTWARE.
 
 /*
 OBS! 
-Kontrollera sökvägen till din pdf-logo (const imgURL nedan), i mitt fall är det profil 2, vanligtvis är det 1
+Du behöver ange en sökväg till pdf-logo som samtliga handläggare har tillgång till, t.ex. en mapp i fileconnector.
 */
-const imgURL = "/administration/profiler/file/1/pdf.flowinstance.logofile/pdf-logo.png";
+const imgURL = "/fileconnector/file//logo/pdf-logo.png";
 const tjanst = document.querySelector(".title").querySelector('h1').textContent.trim();
 const errandno = document.querySelector(".title").querySelector('span').textContent.trim();
 const arende = `#${errandno.split(":")[1].trim()}`;
